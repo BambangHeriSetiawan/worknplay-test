@@ -1,11 +1,10 @@
 package com.simx.dagger2starter.di.module;
 
-import android.app.Application;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
-
-import javax.inject.Singleton;
+import com.simx.dagger2starter.data.remote.FirebaseAuthService;
+import com.simx.dagger2starter.ui.splash.SplashActivity;
+import com.simx.dagger2starter.ui.splash.SplashPresenterImpl;
+import com.simx.dagger2starter.ui.splash.SplashView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,10 +14,16 @@ import dagger.Provides;
  */
 @Module
 public class SplashActivityModule {
+
     @Provides
-    @Singleton
-    static RequestManager provideGlideRequestManager(Application application){
-        return Glide.with(application);
+    SplashView splashView(SplashActivity splashActivity){
+        return splashActivity;
+    }
+
+
+    @Provides
+    SplashPresenterImpl provideSplahPresenter(SplashView splashView, FirebaseAuthService firebaseAuthService){
+        return new SplashPresenterImpl(splashView,firebaseAuthService);
     }
 
 }

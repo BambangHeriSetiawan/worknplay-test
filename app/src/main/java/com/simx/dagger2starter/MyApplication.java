@@ -3,16 +3,16 @@ package com.simx.dagger2starter;
 import android.app.Activity;
 import android.app.Application;
 
-import com.simx.dagger2starter.di.component.AppComponent;
+
 import com.simx.dagger2starter.di.component.DaggerAppComponent;
-
-
+import com.simx.dagger2starter.di.module.FirebaseModule;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by simx on 14/02/18.
@@ -21,16 +21,20 @@ import dagger.android.HasActivityInjector;
 public class MyApplication extends Application implements HasActivityInjector{
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
-    private AppComponent appComponent;
 
-    public AppComponent getAppComponent(){
-        return appComponent;
-    }
+    @Inject
+    CalligraphyConfig mCalligraphyConfig;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        appComponent  = DaggerAppComponent.builder().build();
-        appComponent.inject(this);
+        DaggerAppComponent
+                .builder()
+                .application(this)
+                .firebase(new FirebaseModule())
+                .build()
+                .inject(this);
+        CalligraphyConfig.initDefault(mCalligraphyConfig);
     }
 
     @Override
