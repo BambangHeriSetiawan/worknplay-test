@@ -6,6 +6,9 @@ import android.app.Application;
 
 import com.simx.worknplaytest.di.component.DaggerAppComponent;
 
+import com.simx.worknplaytest.di.module.AppModule;
+import com.simx.worknplaytest.di.module.GlideAppModule;
+import com.simx.worknplaytest.di.module.NetModule;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -30,6 +33,9 @@ public class MyApplication extends Application implements HasActivityInjector{
         DaggerAppComponent
                 .builder()
                 .application(this)
+                .appModule (new AppModule ())
+                .glideModule (new GlideAppModule ())
+                .netModule (new NetModule ())
                 .build()
                 .inject(this);
         CalligraphyConfig.initDefault(mCalligraphyConfig);

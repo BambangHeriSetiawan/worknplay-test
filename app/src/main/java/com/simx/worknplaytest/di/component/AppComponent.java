@@ -2,11 +2,14 @@ package com.simx.worknplaytest.di.component;
 
 import android.app.Application;
 
+import com.bumptech.glide.annotation.GlideModule;
 import com.simx.worknplaytest.MyApplication;
 import com.simx.worknplaytest.di.module.ActivityBuilder;
 import com.simx.worknplaytest.di.module.AppModule;
 
 
+import com.simx.worknplaytest.di.module.GlideAppModule;
+import com.simx.worknplaytest.di.module.NetModule;
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
@@ -20,7 +23,9 @@ import dagger.android.AndroidInjectionModule;
 @Component(modules = {
         AndroidInjectionModule.class,
         AppModule.class,
-        ActivityBuilder.class
+        ActivityBuilder.class,
+        NetModule.class,
+        GlideAppModule.class
 })
 public interface AppComponent  {
 
@@ -30,7 +35,9 @@ public interface AppComponent  {
         @BindsInstance Builder application(Application application);
 
         AppComponent build();
-
+        Builder appModule(AppModule appModule);
+        Builder glideModule(GlideAppModule glideAppModule);
+        Builder netModule(NetModule netModule);
 
     }
 
