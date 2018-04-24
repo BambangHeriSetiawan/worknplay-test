@@ -49,7 +49,6 @@ dependencies {
 
     //Butterknife
     implementation 'com.jakewharton:butterknife:' + rootProject.ext.butterVer
-
     kapt 'com.jakewharton:butterknife-compiler:' + rootProject.ext.butterVer
 
     //Glide

@@ -28,7 +28,7 @@ task clean(type: Delete) {
 }
 ext {
     compileSdkVersion = 27
-    minSdkVersion = 21
+    minSdkVersion = 24
     targetSdkVersion = 27
     googleVer = '27.0.2'
     rxAndroidVer = '2.0.1'

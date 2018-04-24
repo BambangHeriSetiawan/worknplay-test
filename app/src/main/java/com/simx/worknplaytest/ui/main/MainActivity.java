@@ -1,30 +1,22 @@
 package com.simx.worknplaytest.ui.main;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.widget.LinearLayout;
-
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import com.simx.worknplaytest.R;
-import com.simx.worknplaytest.di.base.BaseActivity;
-import com.simx.worknplaytest.ui.singin.SingInActivity;
-
+import com.simx.worknplaytest.di.base.BaseActivitySupportFragment;
+import com.simx.worknplaytest.ui.main.list.FragmentPopularMovie;
 import javax.inject.Inject;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivitySupportFragment implements MainView {
 
     @Inject
     MainPresenterImpl presenter;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.activityMain)
-    LinearLayout activityMain;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
@@ -37,21 +29,13 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
-
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        initFragment();
     }
 
-
+    private void initFragment () {
+        FragmentManager fm = getSupportFragmentManager ();
+        FragmentTransaction ft = fm.beginTransaction ();
+        ft.replace (R.id.frame,FragmentPopularMovie.newInstance ()).commit ();
+    }
 
 }

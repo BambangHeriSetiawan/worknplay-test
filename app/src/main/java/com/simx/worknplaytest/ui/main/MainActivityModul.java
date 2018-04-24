@@ -1,4 +1,4 @@
-package com.simx.worknplaytest.di.module;
+package com.simx.worknplaytest.ui.main;
 
 import com.simx.worknplaytest.helper.ObservableHelper;
 import com.simx.worknplaytest.ui.main.MainActivity;

@@ -1,4 +1,4 @@
-package com.simx.worknplaytest.di.module;
+package com.simx.worknplaytest.ui.splash;
 
 
 import com.simx.worknplaytest.ui.splash.SplashActivity;

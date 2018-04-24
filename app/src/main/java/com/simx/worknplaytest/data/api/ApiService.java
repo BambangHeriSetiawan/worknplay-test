@@ -11,5 +11,6 @@ public interface ApiService {
   @Headers({"Accept: application/json", "Content-type: application/json"})
   @GET(AppConst.POPULAR_URL)
   Observable<ResponsePopular> getPopularMovie(
-      @Query(AppConst.API_KEY) String api_key);
+      @Query(AppConst.API_KEY) String api_key,
+      @Query("sort_by") String sort_by);
 }

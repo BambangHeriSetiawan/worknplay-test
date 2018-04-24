@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_margin="5dp"
+  android:layout_height="300dp">
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="300dp">
+    <ImageView
+      android:id="@+id/img"
+      android:scaleType="centerCrop"
+      android:src="@mipmap/ic_launcher"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+  </FrameLayout>
+  <TextView
+    android:id="@+id/tv_rating"
+    android:background="@color/colorPrimary"
+    android:layout_margin="5dp"
+    android:padding="5dp"
+    android:textColor="@color/white"
+    android:text="7.6"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+  <TextView
+    android:id="@+id/tv_title"
+    android:textColor="@color/white"
+    android:background="@color/colorPrimary"
+    android:padding="5dp"
+    android:text="@string/app_name"
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+</RelativeLayout>

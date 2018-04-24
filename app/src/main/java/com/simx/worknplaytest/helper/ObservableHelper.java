@@ -12,8 +12,8 @@ public class ObservableHelper {
   public ObservableHelper (Retrofit retrofit) {
     this.retrofit = retrofit;
   }
-  public Observable<ResponsePopular> getPopularMovie(){
-    return retrofit.create (ApiService.class).getPopularMovie (AppConst.API_KEY)
+  public Observable<ResponsePopular> getPopularMovie(String sortBy){
+    return retrofit.create (ApiService.class).getPopularMovie (AppConst.MOVIE_DB_KEY,sortBy)
         .subscribeOn (Schedulers.newThread ())
         .observeOn (AndroidSchedulers.mainThread ());
   }
