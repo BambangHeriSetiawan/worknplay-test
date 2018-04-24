@@ -1,5 +1,6 @@
 package com.simx.worknplaytest.ui.main.detail;
 
+import com.simx.worknplaytest.helper.ObservableHelper;
 import dagger.Module;
 import dagger.Provides;
 
@@ -11,7 +12,7 @@ public class DetailModule {
   }
 
   @Provides
-  DetailPresenterImpl provideFragmentPopularPresenterImpl(DetailPresenter presenter){
-    return new DetailPresenterImpl (presenter);
+  DetailPresenterImpl provideFragmentPopularPresenterImpl(DetailPresenter presenter, ObservableHelper helper){
+    return new DetailPresenterImpl (presenter,helper);
   }
 }

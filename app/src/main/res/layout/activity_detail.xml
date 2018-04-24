@@ -18,6 +18,11 @@
     <ImageView
       android:id="@+id/img_full"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+      android:layout_height="200dp"/>
+    <ImageView
+      android:layout_alignParentBottom="true"
+      android:id="@+id/img_full1"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"/>
   </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
