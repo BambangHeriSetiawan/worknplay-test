@@ -7,7 +7,5 @@ import com.simx.worknplaytest.data.model.UserModel;
  */
 
 public interface MainView {
-    void initProfile(UserModel userModel);
 
-    void gotoLogin();
 }

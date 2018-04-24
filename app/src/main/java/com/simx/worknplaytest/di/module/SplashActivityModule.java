@@ -1,7 +1,6 @@
 package com.simx.worknplaytest.di.module;
 
 
-import com.simx.worknplaytest.data.remote.FirebaseAuthService;
 import com.simx.worknplaytest.ui.splash.SplashActivity;
 import com.simx.worknplaytest.ui.splash.SplashPresenterImpl;
 import com.simx.worknplaytest.ui.splash.SplashView;
@@ -22,8 +21,8 @@ public class SplashActivityModule {
 
 
     @Provides
-    SplashPresenterImpl provideSplahPresenter(SplashView splashView, FirebaseAuthService firebaseAuthService){
-        return new SplashPresenterImpl(splashView,firebaseAuthService);
+    SplashPresenterImpl provideSplahPresenter(SplashView splashView ){
+        return new SplashPresenterImpl(splashView);
     }
 
 }

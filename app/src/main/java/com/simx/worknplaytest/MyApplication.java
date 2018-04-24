@@ -5,7 +5,6 @@ import android.app.Application;
 
 
 import com.simx.worknplaytest.di.component.DaggerAppComponent;
-import com.simx.worknplaytest.di.module.FirebaseModule;
 
 import javax.inject.Inject;
 
@@ -31,7 +30,6 @@ public class MyApplication extends Application implements HasActivityInjector{
         DaggerAppComponent
                 .builder()
                 .application(this)
-                .firebase(new FirebaseModule())
                 .build()
                 .inject(this);
         CalligraphyConfig.initDefault(mCalligraphyConfig);

@@ -1,6 +1,5 @@
 package com.simx.worknplaytest.di.module;
 
-import com.simx.worknplaytest.data.remote.FirebaseAuthService;
 import com.simx.worknplaytest.ui.main.MainActivity;
 import com.simx.worknplaytest.ui.main.MainPresenterImpl;
 import com.simx.worknplaytest.ui.main.MainView;
@@ -18,7 +17,7 @@ public class MainActivityModul {
         return mainActivity;
     }
     @Provides
-    MainPresenterImpl provideMainPresenterImp(MainView mainView, FirebaseAuthService firebaseAuthService){
-        return new MainPresenterImpl(mainView,firebaseAuthService);
+    MainPresenterImpl provideMainPresenterImp(MainView mainView){
+        return new MainPresenterImpl(mainView);
     }
 }

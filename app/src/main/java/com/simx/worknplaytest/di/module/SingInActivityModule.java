@@ -1,7 +1,6 @@
 package com.simx.worknplaytest.di.module;
 
 import com.simx.worknplaytest.data.model.UserModel;
-import com.simx.worknplaytest.data.remote.FirebaseAuthService;
 import com.simx.worknplaytest.ui.singin.SingInActivity;
 import com.simx.worknplaytest.ui.singin.SingInPresenterImp;
 import com.simx.worknplaytest.ui.singin.SinginView;
@@ -23,7 +22,7 @@ public class SingInActivityModule {
 
     @Provides
 
-    SingInPresenterImp provideSinginPresenter(SinginView singinView, FirebaseAuthService firebaseAuthService, UserModel userModel){
-        return new SingInPresenterImp(singinView, firebaseAuthService,userModel);
+    SingInPresenterImp provideSinginPresenter(SinginView singinView,  UserModel userModel){
+        return new SingInPresenterImp(singinView, userModel);
     }
 }

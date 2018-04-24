@@ -5,13 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.simx.worknplaytest.ui.main.MainActivity">
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/clRootView"
             android:layout_width="match_parent"
@@ -41,7 +34,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/light_gray" />
-
                 </android.support.design.widget.AppBarLayout>
                 <FrameLayout
                     android:id="@+id/frame"
@@ -50,29 +42,4 @@
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
             </LinearLayout>
         </android.support.design.widget.CoordinatorLayout>
-
-        <android.support.design.widget.NavigationView
-            android:id="@+id/navigationView"
-            style="@style/Widget.Design.NavigationView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/white"
-            app:itemBackground="@color/white"
-            app:itemIconTint="@color/black_effective"
-            app:itemTextColor="@color/black_effective"
-            app:headerLayout="@layout/nav_header_main"
-            app:menu="@menu/drawer">
-            <TextView
-                android:id="@+id/tvAppVersion"
-                style="@style/TextStyle.Title.Sub"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:padding="5dp" />
-        </android.support.design.widget.NavigationView>
-
-    </android.support.v4.widget.DrawerLayout>
-
-
 </FrameLayout>

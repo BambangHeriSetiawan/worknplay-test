@@ -45,21 +45,9 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
 
     }
-
     @Override
-    public void onSplashLoad() {
-        Log.e("SplashActivity", "onSplashLoad: ");
-    }
-
-    @Override
-    public void gotoLogin() {
-        SingInActivity.start(this);
-        this.finish();
-    }
-
-    @Override
-    public void gotoMain(String uid) {
-        MainActivity.start(this,uid);
+    public void gotoMain() {
+        MainActivity.start(this);
         this.finish();
     }
 

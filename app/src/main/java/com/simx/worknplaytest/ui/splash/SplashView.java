@@ -6,13 +6,10 @@ package com.simx.worknplaytest.ui.splash;
 
 public interface SplashView {
 
-    void onSplashLoad();
-
-    void gotoLogin();
 
     void showProgress(boolean isShow);
 
-    void gotoMain(String uid);
+    void gotoMain();
 
     void showError(String message);
 }
