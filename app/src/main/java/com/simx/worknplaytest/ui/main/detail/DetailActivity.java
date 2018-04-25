@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,12 +32,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import javax.inject.Inject;
 import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class DetailActivity extends BaseActivity implements DetailPresenter {
+public class DetailActivity extends BaseActivity implements DetailPresenter, EasyPermissions.PermissionCallbacks {
 
   @BindView(R.id.my_toolbar)
   Toolbar myToolbar;
@@ -146,7 +149,11 @@ public class DetailActivity extends BaseActivity implements DetailPresenter {
   public void showSnackBar () {
     Snackbar snackbar = Snackbar.make (container, "Download successfull at "+root.getAbsolutePath (), Snackbar.LENGTH_INDEFINITE);
     snackbar.setAction ("SHOW", v -> {
-      showImage ();
+      if (snackbar.isShown ()){
+        snackbar.dismiss ();
+        showImage ();
+      }
+
     });
     // get snackbar view
     View snackbarView = snackbar.getView();
@@ -159,9 +166,24 @@ public class DetailActivity extends BaseActivity implements DetailPresenter {
   }
 
   private void showImage () {
-    Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+    Log.e ("DetailActivity", "showImage: " + mediaFile.getAbsoluteFile ());
+    Log.e ("DetailActivity", "showImage: " + mediaFile.getAbsolutePath ());
+    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+    StrictMode.setVmPolicy(builder.build());
+    /*Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
     galleryIntent.setType ("image/*");
-    startActivity(galleryIntent);
+    startActivity(galleryIntent);*/
+    /*startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("content:/"+mediaFile.getAbsolutePath ())));*/
+    Uri uri =  Uri.fromFile(mediaFile);
+    Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+    String mime = "*/*";
+    MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+    if (mimeTypeMap.hasExtension(
+        mimeTypeMap.getFileExtensionFromUrl(uri.toString())))
+      mime = mimeTypeMap.getMimeTypeFromExtension(
+          mimeTypeMap.getFileExtensionFromUrl(uri.toString()));
+    intent.setDataAndType(uri,mime);
+    startActivity(intent);
   }
 
   private void showProgresDownload (long l, long target) {
@@ -208,11 +230,8 @@ public class DetailActivity extends BaseActivity implements DetailPresenter {
   @Override
   protected void onActivityResult (int requestCode, int resultCode, Intent data) {
     super.onActivityResult (requestCode, resultCode, data);
-    switch (requestCode) {
-      case AppConst.STOREAGE_PERMISSION_CODE:
-        presenter.downloadImage (pathImage);
-        break;
-    }
+    Log.e ("DetailActivity", "onActivityResult: " + requestCode);
+    if (requestCode == AppConst.STOREAGE_PERMISSION_CODE)downloadTask ();
   }
 
   @Override
@@ -222,5 +241,16 @@ public class DetailActivity extends BaseActivity implements DetailPresenter {
     }else {
       progresView.setVisibility (View.GONE);
     }
+  }
+
+  @Override
+  public void onPermissionsGranted (int requestCode, @NonNull List<String> perms) {
+    Log.e ("DetailActivity", "onPermissionsGranted: " + requestCode);
+    if (requestCode == AppConst.STOREAGE_PERMISSION_CODE)downloadTask ();
+  }
+
+  @Override
+  public void onPermissionsDenied (int requestCode, @NonNull List<String> perms) {
+
   }
 }
