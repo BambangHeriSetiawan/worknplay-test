@@ -1,6 +1,8 @@
 package com.simx.worknplaytest.ui.main.list;
 
 
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,6 +27,7 @@ import com.simx.worknplaytest.R;
 import com.simx.worknplaytest.data.model.ResultsItem;
 import com.simx.worknplaytest.di.base.BaseFragment;
 import com.simx.worknplaytest.helper.AppConst;
+import com.simx.worknplaytest.helper.DialogHelper;
 import com.simx.worknplaytest.ui.main.MainPresenter;
 import com.simx.worknplaytest.ui.main.detail.DetailActivity;
 import java.util.Comparator;
@@ -120,13 +123,24 @@ public class FragmentPopularMovie extends BaseFragment implements FragmentPopula
   public boolean onOptionsItemSelected (MenuItem item) {
     switch (item.getItemId ()) {
       case R.id.nav_sort:
-        adapterMoviePopular.sortAsc (true);
-        break;
-      case R.id.nav_sort1:
-        adapterMoviePopular.sortAsc (false);
+        showDialogChoice();
         break;
     }
     return super.onOptionsItemSelected (item);
+  }
+
+  private void showDialogChoice () {
+    DialogHelper.instance ().showDialogShortChoice (getContext (), (dialog, which) -> {
+      dialog.dismiss ();
+      switch (which) {
+        case 0:
+          adapterMoviePopular.sortAsc (true);
+          break;
+        case 1:
+          adapterMoviePopular.sortAsc (false);
+          break;
+      }
+    }).show ();
   }
 
   @Override

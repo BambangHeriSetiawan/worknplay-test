@@ -20,9 +20,5 @@
         android:icon="@drawable/ic_sort_24dp"
         android:title="Sort"
         app:showAsAction="ifRoom"/>
-    <item
-      android:id="@+id/nav_sort1"
-      android:icon="@drawable/ic_sort_24dp"
-      android:title="Sort"
-      app:showAsAction="ifRoom"/>
+
 </menu>

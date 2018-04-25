@@ -69,24 +69,15 @@ public class AdapterMoviePopular extends Adapter<Holder> {
   public void sortAsc (boolean asc){
     if (asc){
     if (resultsItems!=null){
-      Collections.sort (resultsItems, new Comparator<ResultsItem> () {
-        @Override
-        public int compare (ResultsItem o1, ResultsItem o2) {
-          return Double.toString (o1.getVoteAverage ()).compareTo (Double.toString (o2.getVoteAverage ()));
-        }
-      });
+      Collections.sort (resultsItems,
+          (o1, o2) -> Double.toString (o1.getVoteAverage ()).compareTo (Double.toString (o2.getVoteAverage ())));
     }
     }else {
       if (resultsItems!=null){
-        Collections.sort (resultsItems, new Comparator<ResultsItem> () {
-          @Override
-          public int compare (ResultsItem o1, ResultsItem o2) {
-            return Double.toString (o2.getVoteAverage ()).compareTo (Double.toString (o1.getVoteAverage ()));
-          }
-        });
+        Collections.sort (resultsItems,
+            (o1, o2) -> Double.toString (o2.getVoteAverage ()).compareTo (Double.toString (o1.getVoteAverage ())));
       }
     }
-
     notifyDataSetChanged ();
   }
 
