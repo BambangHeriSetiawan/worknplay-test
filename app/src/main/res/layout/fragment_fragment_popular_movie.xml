@@ -11,9 +11,20 @@
     android:layout_height="wrap_content">
     <include layout="@layout/base_toolbar"/>
   </android.support.design.widget.AppBarLayout>
-  <android.support.v7.widget.RecyclerView
+  <RelativeLayout
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:id="@+id/rcv_movie"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/rcv_movie"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+    <ProgressBar
+      android:visibility="gone"
+      android:id="@+id/progress_view"
+      android:layout_centerInParent="true"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+  </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

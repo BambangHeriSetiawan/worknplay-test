@@ -1,5 +1,8 @@
 package com.simx.worknplaytest.helper;
 
+import android.Manifest;
+import android.Manifest.permission;
+
 /**
  * Created by simx on 14/02/18.
  */
@@ -13,5 +16,9 @@ public class AppConst {
     public static final String PATH_IMAGE ="https://image.tmdb.org/t/p/w1280";
     /*PATH URL*/
     public static final String POPULAR_URL ="movie/popular";
+
+    /*Permissions*/
+    public static String [] STORAGE_PERMISSION = new String[]{permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE};
+    public static final int STOREAGE_PERMISSION_CODE = 123;
 
 }

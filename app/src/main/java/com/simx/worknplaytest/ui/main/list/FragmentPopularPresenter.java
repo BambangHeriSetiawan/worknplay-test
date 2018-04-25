@@ -10,4 +10,6 @@ public interface FragmentPopularPresenter {
   void initDataMovie (List<ResultsItem> results);
 
   void showError (String message);
+
+  void showProgress (boolean isShow);
 }

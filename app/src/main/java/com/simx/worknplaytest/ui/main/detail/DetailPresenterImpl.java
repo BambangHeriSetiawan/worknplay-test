@@ -23,11 +23,15 @@ public class DetailPresenterImpl {
   }
 
   public void downloadImage (String pathImage) {
+    presenter.showProggress(true);
     helper.donloadImage (pathImage).subscribe (responseBody -> {
-      presenter.saveToDisk(responseBody);
-      Log.e ("DetailPresenterImpl", "downloadImage: " + responseBody.string ());
+      presenter.saveToDisk (responseBody);
     },throwable -> {
-      Log.e ("DetailPresenterImpl", "downloadImage: " + throwable.getMessage ());
+      presenter.showProggress (false);
+      presenter.showError(throwable.getMessage ());
+    },() -> {
+      presenter.showProggress (false);
+      presenter.showSnackBar();
     });
   }
 

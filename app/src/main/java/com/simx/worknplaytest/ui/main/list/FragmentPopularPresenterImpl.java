@@ -14,11 +14,14 @@ public class FragmentPopularPresenterImpl {
   }
 
   public void getMovieList (String sortBy) {
+    presenter.showProgress(true);
     helper.getPopularMovie (sortBy).subscribe (responsePopular -> {
       if (responsePopular.getResults ()!=null)presenter.initDataMovie(responsePopular.getResults ());
     },throwable -> {
+      presenter.showProgress (false);
       presenter.showError(throwable.getMessage ());
-      Log.e ("FragmentPopularl", "getMovieList: " + throwable.getMessage ());
+    },() -> {
+      presenter.showProgress (false);
     });
   }
 }

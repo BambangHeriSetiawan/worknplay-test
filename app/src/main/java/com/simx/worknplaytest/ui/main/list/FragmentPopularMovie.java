@@ -1,8 +1,6 @@
 package com.simx.worknplaytest.ui.main.list;
 
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,13 +10,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +35,8 @@ import javax.inject.Inject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentPopularMovie extends BaseFragment implements FragmentPopularPresenter,MainPresenter {
+public class FragmentPopularMovie extends BaseFragment implements FragmentPopularPresenter,
+    MainPresenter {
 
 
   @BindView(R.id.rcv_movie)
@@ -45,6 +44,8 @@ public class FragmentPopularMovie extends BaseFragment implements FragmentPopula
   Unbinder unbinder;
   @BindView(R.id.my_toolbar)
   Toolbar myToolbar;
+  @BindView(R.id.progress_view)
+  ProgressBar progressView;
 
 
   public FragmentPopularMovie () {
@@ -91,14 +92,15 @@ public class FragmentPopularMovie extends BaseFragment implements FragmentPopula
 
   private void initRcv () {
     rcvMovie.setHasFixedSize (true);
-    rcvMovie.setLayoutManager (new GridLayoutManager (getActivity (), 2,GridLayoutManager.VERTICAL,false));
+    rcvMovie.setLayoutManager (
+        new GridLayoutManager (getActivity (), 2, GridLayoutManager.VERTICAL, false));
     rcvMovie.setItemAnimator (new DefaultItemAnimator ());
     rcvMovie.setAdapter (adapterMoviePopular);
   }
 
   @Override
   public void showDetailMovie (String posterPath) {
-    DetailActivity.start (getContext (),posterPath);
+    DetailActivity.start (getContext (), posterPath);
   }
 
   @Override
@@ -123,7 +125,7 @@ public class FragmentPopularMovie extends BaseFragment implements FragmentPopula
   public boolean onOptionsItemSelected (MenuItem item) {
     switch (item.getItemId ()) {
       case R.id.nav_sort:
-        showDialogChoice();
+        showDialogChoice ();
         break;
     }
     return super.onOptionsItemSelected (item);
@@ -144,8 +146,18 @@ public class FragmentPopularMovie extends BaseFragment implements FragmentPopula
   }
 
   @Override
+  public void showProgress (boolean isShow) {
+    if (isShow){
+      progressView.setVisibility (View.VISIBLE);
+    }else {
+      progressView.setVisibility (View.GONE);
+    }
+  }
+
+  @Override
   public void onDestroyView () {
     super.onDestroyView ();
     unbinder.unbind ();
   }
+
 }
